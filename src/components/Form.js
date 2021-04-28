@@ -13,6 +13,7 @@ const Form = () => {
       add_todo({
         id: uuid(),
         todo: name,
+        done: false,
       })
     );
   };

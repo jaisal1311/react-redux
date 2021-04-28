@@ -1,18 +1,12 @@
 import { todoActions } from "../constants/todoConstants";
 
 const initState = {
-  todoList: [
-    {
-      id: 1,
-      todo: "Get up",
-    },
-  ],
+  todoList: [],
 };
 
 export const todoReducer = (state = initState, { type, payload }) => {
   switch (type) {
     case todoActions.ADD_TODO:
-      // let newTodoList = state.todoList.push(payload.todo);
       let newAddedState = {
         ...state,
         todoList: [...state.todoList, payload.todo],
@@ -20,13 +14,25 @@ export const todoReducer = (state = initState, { type, payload }) => {
 
       return newAddedState;
     case todoActions.DEL_TODO:
-      // let newTodoList = state.todoList.push(payload.todo);
       let newDelState = {
         ...state,
         todoList: state.todoList.filter((item) => item.id !== payload.id),
       };
 
       return newDelState;
+
+    case todoActions.TOGGLE_DONE:
+      let newDoneState = {
+        ...state,
+        todoList: state.todoList.map((item) => {
+          if (item.id === payload.id) {
+            item.done = !item.done;
+          }
+          return item;
+        }),
+      };
+
+      return newDoneState;
 
     default:
       return state;

@@ -17,3 +17,12 @@ export const del_todo = (id) => {
     },
   };
 };
+
+export const toggle_done = (id) => {
+  return {
+    type: todoActions.TOGGLE_DONE,
+    payload: {
+      id: id,
+    },
+  };
+};
